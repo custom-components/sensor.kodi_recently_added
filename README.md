@@ -44,4 +44,4 @@ Kodi's recently added media.
       title: Recently Added Movies
       image_style: fanart
 
-## \*Currently genres, rating, and studio only work for Movies.
+*NOTE: Currently genres, rating, and studio only work for Movies.*
