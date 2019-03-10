@@ -1,4 +1,5 @@
 import json
+import logger
 from urllib import parse
 
 import voluptuous as vol
@@ -11,7 +12,7 @@ from homeassistant.const import (
 from homeassistant.helpers.entity import Entity
 
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_HOST, default='localhost'): cv.string,
@@ -20,6 +21,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Inclusive(CONF_USERNAME, 'auth'): cv.string,
     vol.Inclusive(CONF_PASSWORD, 'auth'): cv.string,
 })
+_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_platform(hass, config, async_add_entities,
@@ -69,26 +71,33 @@ class KodiRecentlyAddedTVSensor(KodiMediaSensor):
             'icon': 'mdi:arrow-down-bold',
         }]
         for show in self.data:
-            card = {
-                'airdate': show['dateadded'].replace(' ', 'T') + 'Z',
-                'episode': show['title'],
-                'flag': show['playcount'] == 0,
-                'genres': '',
-                'number': 'S{0:0>2}E{1:0>2}'.format(
-                    show['season'], show['episode']),
-                'release': '$day, $date',
-                'runtime': show['runtime'] // 60,
-                'title': show['showtitle'],
-                'studio': '',
-            }
-            rating = round(show['rating'], 1)
-            if rating:
-                rating = '\N{BLACK STAR} {}'.format(rating)
-            card['rating'] = rating
-            fanart = show['art']['tvshow.fanart']
-            poster = show['art']['tvshow.poster']
-            card['fanart'] = parse.unquote(fanart)[8:].strip('/')
-            card['poster'] = parse.unquote(poster)[8:].strip('/')
+            try:
+                card = {
+                    'airdate': show['dateadded'].replace(' ', 'T') + 'Z',
+                    'episode': show['title'],
+                    'fanart': '',
+                    'flag': show['playcount'] == 0,
+                    'genres': '',
+                    'number': 'S{0:0>2}E{1:0>2}'.format(
+                        show['season'], show['episode']),
+                    'poster': '',
+                    'release': '$day, $date',
+                    'runtime': show['runtime'] // 60,
+                    'title': show['showtitle'],
+                    'studio': '',
+                }
+                rating = round(show['rating'], 1)
+                if rating:
+                    rating = '\N{BLACK STAR} {}'.format(rating)
+                card['rating'] = rating
+                fanart = show['art'].get('tvshow.fanart', '')
+                poster = show['art'].get('tvshow.poster', '')
+                if fanart:
+                    card['fanart'] = parse.unquote(fanart)[8:].strip('/')
+                if poster:
+                    card['poster'] = parse.unquote(poster)[8:].strip('/')
+            except KeyError:
+                _LOGGER.exception('Error parsing key from tv blob: %s', show)
             card_json.append(card)
         attrs['data'] = json.dumps(card_json)
         return attrs
@@ -122,23 +131,26 @@ class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
             'icon': 'mdi:arrow-down-bold',
         }]
         for show in self.data:
-            card = {
-                'aired': show['premiered'],
-                'airdate': show['dateadded'].replace(' ', 'T') + 'Z',
-                'flag': show['playcount'] == 0,
-                'genres': ','.join(show['genre']),
-                'rating': round(show['rating'], 1),
-                'release': '$date',
-                'runtime': show['runtime'] // 60,
-                'title': show['title'],
-                'studio': ','.join(show['studio']),
-            }
-            rating = round(show['rating'], 1)
-            if rating:
-                rating = '\N{BLACK STAR} {}'.format(rating)
-            card['rating'] = rating
-            fanart = show['art'].get('fanart', '')
-            poster = show['art'].get('poster', '')
+            try:
+                card = {
+                    'aired': show['premiered'],
+                    'airdate': show['dateadded'].replace(' ', 'T') + 'Z',
+                    'flag': show['playcount'] == 0,
+                    'genres': ','.join(show['genre']),
+                    'rating': round(show['rating'], 1),
+                    'release': '$date',
+                    'runtime': show['runtime'] // 60,
+                    'title': show['title'],
+                    'studio': ','.join(show['studio']),
+                }
+                rating = round(show['rating'], 1)
+                if rating:
+                    rating = '\N{BLACK STAR} {}'.format(rating)
+                card['rating'] = rating
+                fanart = show['art'].get('fanart', '')
+                poster = show['art'].get('poster', '')
+            except KeyError:
+                _LOGGER.exception('Error parsing key from movie blob: %s', show)
             if fanart:
                 fanart = parse.unquote(fanart)[8:].strip('/')
             if poster:
