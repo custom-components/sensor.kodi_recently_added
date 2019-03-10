@@ -106,7 +106,8 @@ class KodiRecentlyAddedTVSensor(KodiMediaSensor):
         result = await self.kodi.async_call_method(
             'VideoLibrary.GetRecentlyAddedEpisodes',
             properties=self.properties)
-        self.data = result['episodes']
+        if result:
+            self.data = result['episodes']
 
 
 class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
@@ -164,4 +165,5 @@ class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
     async def async_update(self):
         result = await self.kodi.async_call_method(
             'VideoLibrary.GetRecentlyAddedMovies', properties=self.properties)
-        self.data = result['movies']
+        if result:
+            self.data = result['movies']
