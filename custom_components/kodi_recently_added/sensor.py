@@ -1,5 +1,5 @@
 import json
-import logger
+import logging
 from urllib import parse
 
 import voluptuous as vol
