@@ -4,7 +4,7 @@ from urllib import parse
 
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
-from homeassistant.components.media_player.kodi import (
+from homeassistant.components.kodi.media_player import (
     CONF_TCP_PORT, DEFAULT_TCP_PORT, KodiDevice)
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import (
