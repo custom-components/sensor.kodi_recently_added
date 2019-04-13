@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.2.2 (2019-04-13)
+
+- Fixed import error due to great migration.  Caused installs of HA >=0.91 to fail.
+
 ## v0.2.1 (2019-03-10)
 
 - Fixed error that occured when there was a TransportError getting data from kodi.

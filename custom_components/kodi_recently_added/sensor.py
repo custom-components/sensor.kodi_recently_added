@@ -4,15 +4,21 @@ from urllib import parse
 
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
-from homeassistant.components.media_player.kodi import (
-    CONF_TCP_PORT, DEFAULT_TCP_PORT, KodiDevice)
+try:
+    # Pre v0.91
+    from homeassistant.components.media_player.kodi import (
+        CONF_TCP_PORT, DEFAULT_TCP_PORT, KodiDevice)
+except ImportError:
+    # >= v0.91
+    from homeassistant.components.kodi.media_player import (
+        CONF_TCP_PORT, DEFAULT_TCP_PORT, KodiDevice)
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import (
     CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME)
 from homeassistant.helpers.entity import Entity
 
 
-__version__ = '0.2.0'
+__version__ = '0.2.2'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_HOST, default='localhost'): cv.string,
