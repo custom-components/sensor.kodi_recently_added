@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## In Development (not yet released)
+
+## v0.2.3 (2019-04-25)
+
+- Added required manifest.json for 0.92.
+
 ## v0.2.2 (2019-04-13)
 
 - Fixed import error due to great migration.  Caused installs of HA >=0.91 to fail.
