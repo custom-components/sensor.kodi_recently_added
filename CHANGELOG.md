@@ -2,6 +2,10 @@
 
 ## In Development (not yet released)
 
+## v0.2.4 (2019-04-26)
+
+- Removed kodi from dependencies in manifest.json
+
 ## v0.2.3 (2019-04-25)
 
 - Added required manifest.json for 0.92.
