@@ -2,9 +2,13 @@
 
 ## In Development (not yet released)
 
-## v0.2.4 (2019-05-02)
+## v0.2.5 (2019-05-02)
 
 - Added exception logging when encountering unexpected json responses from kodi.
+
+## v0.2.4 (2019-04-26)
+
+- Removed kodi from dependencies in manifest.json
 
 ## v0.2.3 (2019-04-25)
 
