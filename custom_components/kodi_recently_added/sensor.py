@@ -18,7 +18,7 @@ from homeassistant.const import (
 from homeassistant.helpers.entity import Entity
 
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_HOST, default='localhost'): cv.string,
@@ -113,7 +113,11 @@ class KodiRecentlyAddedTVSensor(KodiMediaSensor):
             'VideoLibrary.GetRecentlyAddedEpisodes',
             properties=self.properties)
         if result:
-            self.data = result['episodes']
+            try:
+                self.data = result['episodes']
+            except KeyError:
+                _LOGGER.exception(
+                    'Unexpected result while fetching tv shows: %s', result)
 
 
 class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
@@ -157,7 +161,8 @@ class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
                 fanart = show['art'].get('fanart', '')
                 poster = show['art'].get('poster', '')
             except KeyError:
-                _LOGGER.exception('Error parsing key from movie blob: %s', show)
+                _LOGGER.exception(
+                    'Error parsing key from movie blob: %s', show)
             if fanart:
                 fanart = parse.unquote(fanart)[8:].strip('/')
             if poster:
@@ -172,4 +177,8 @@ class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
         result = await self.kodi.async_call_method(
             'VideoLibrary.GetRecentlyAddedMovies', properties=self.properties)
         if result:
-            self.data = result['movies']
+            try:
+                self.data = result['movies']
+            except KeyError:
+                _LOGGER.exception(
+                    'Unexpected result while fetching movies: %s', result)
