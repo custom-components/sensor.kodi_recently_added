@@ -3,7 +3,7 @@
 Home Assistant component to feed [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card) with
 Kodi's recently added media.
 
-[Kodi Recently Added Media](https://github.com/custom-components/sensor.kodi_recently_added/raw/master/example.png)
+![Kodi Recently Added Media](https://github.com/custom-components/sensor.kodi_recently_added/raw/master/example.png)
 
 ### If you're having issues, check out the [troubleshooting guide](https://github.com/custom-cards/upcoming-media-card/blob/master/troubleshooting.md) before posting an issue or asking for help on the forums.
 
