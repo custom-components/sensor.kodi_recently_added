@@ -9,7 +9,18 @@ Kodi's recently added media.
 
 ### If you're having issues, check out the [troubleshooting guide](https://github.com/custom-cards/upcoming-media-card/blob/master/troubleshooting.md) before posting an issue or asking for help on the forums.
 
-## Installation:
+## HACS Installation
+
+1. On the HACS Community tab click on `Settings`.
+2. Scroll down to Custom Repositories and add a new custom repository.
+   Enter `custom-components/sensor.kodi_recently_added` and choose `Integration` from the dropdown then click the save button.
+3. Search for 'Kodi Recently Added' in the store and click on it then click install.
+4. Install the card: [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card)
+5. Add the code to your `configuration.yaml` using the config options below.
+6. Add the code for the card to your `ui-lovelace.yaml`. 
+7. **You will need to restart after installation for the component to start working.**
+
+## Manual Installation:
 1. Install this component by copying [sensor.py](https://raw.githubusercontent.com/custom-components/sensor.kodi_recently_added/master/custom_components/kodi_recently_added/sensor.py) to your `/custom_components/kodi_recently_added/` folder.
 2. Install the card: [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card)
 3. Add the code to your `configuration.yaml` using the config options below.
