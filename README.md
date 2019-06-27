@@ -1,6 +1,6 @@
 # Kodi Recently Added Component
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/custom-components/hacs)
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
 
 Home Assistant component to feed [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card) with
 Kodi's recently added media.
@@ -11,14 +11,11 @@ Kodi's recently added media.
 
 ## HACS Installation
 
-1. On the HACS Community tab click on `Settings`.
-2. Scroll down to Custom Repositories and add a new custom repository.
-   Enter `custom-components/sensor.kodi_recently_added` and choose `Integration` from the dropdown then click the save button.
-3. Search for 'Kodi Recently Added' in the store and click on it then click install.
-4. Install the card: [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card)
-5. Add the code to your `configuration.yaml` using the config options below.
-6. Add the code for the card to your `ui-lovelace.yaml`. 
-7. **You will need to restart after installation for the component to start working.**
+1. Search for `Kodi Recently Added Component` in the HACS Store tab.
+2. Install the card: [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card)
+3. Add the code to your `configuration.yaml` using the config options below.
+4. Add the code for the card to your `ui-lovelace.yaml`. 
+5. **You will need to restart after installation for the component to start working.**
 
 ## Manual Installation:
 1. Install this component by copying [sensor.py](https://raw.githubusercontent.com/custom-components/sensor.kodi_recently_added/master/custom_components/kodi_recently_added/sensor.py) to your `/custom_components/kodi_recently_added/` folder.
