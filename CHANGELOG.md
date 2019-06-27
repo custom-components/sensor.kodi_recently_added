@@ -2,6 +2,8 @@
 
 ## In Development (not yet released)
 
+- Added support for the custom updater component.
+
 ## v0.2.5 (2019-05-02)
 
 - Added exception logging when encountering unexpected json responses from kodi.
