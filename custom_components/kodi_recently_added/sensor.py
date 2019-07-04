@@ -18,7 +18,7 @@ from homeassistant.const import (
 from homeassistant.helpers.entity import Entity
 
 
-__version__ = '0.2.6'
+__version__ = '0.2.7'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_HOST, default='localhost'): cv.string,
@@ -48,10 +48,29 @@ class KodiMediaSensor(Entity):
             password=config.get(CONF_PASSWORD))
         self._state = None
         self.data = []
+        self.base_web_url = 'http://{}:{}/image/image%3A%2F%2F'.format(
+            config.get(CONF_HOST), config.get(CONF_PORT))
 
     @property
     def state(self):
         return self._state
+
+    def get_web_url(self, path: str) -> str:
+        """Get the web URL for the provided path.
+
+        This is used for fanart/poster images that are not a http url.  For
+        example the path is local to the kodi installation or a path to
+        an NFS share.
+
+        :param path: The local/nfs/samba/etc. path.
+        :returns: The web url to access the image over http.
+        """
+        if path.lower().startswith('http'):
+            return path
+        # This looks strange, but the path needs to be quoted twice in order
+        # to work.
+        quoted_path = parse.quote(parse.quote(path, safe=''))
+        return self.base_web_url + quoted_path
 
 
 class KodiRecentlyAddedTVSensor(KodiMediaSensor):
@@ -99,9 +118,11 @@ class KodiRecentlyAddedTVSensor(KodiMediaSensor):
                 fanart = show['art'].get('tvshow.fanart', '')
                 poster = show['art'].get('tvshow.poster', '')
                 if fanart:
-                    card['fanart'] = parse.unquote(fanart)[8:].strip('/')
+                    card['fanart'] = self.get_web_url(
+                        parse.unquote(fanart)[8:].strip('/'))
                 if poster:
-                    card['poster'] = parse.unquote(poster)[8:].strip('/')
+                    card['poster'] = self.get_web_url(
+                        parse.unquote(poster)[8:].strip('/'))
             except KeyError:
                 _LOGGER.exception('Error parsing key from tv blob: %s', show)
             card_json.append(card)
@@ -164,9 +185,9 @@ class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
                 _LOGGER.exception(
                     'Error parsing key from movie blob: %s', show)
             if fanart:
-                fanart = parse.unquote(fanart)[8:].strip('/')
+                fanart = self.get_web_url(parse.unquote(fanart)[8:].strip('/'))
             if poster:
-                poster = parse.unquote(poster)[8:].strip('/')
+                poster = self.get_web_url(parse.unquote(poster)[8:].strip('/'))
             card['fanart'] = fanart
             card['poster'] = poster
             card_json.append(card)

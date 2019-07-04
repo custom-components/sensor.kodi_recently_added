@@ -56,6 +56,3 @@ Kodi's recently added media.
       image_style: fanart
 
 *NOTE: Currently genres, rating, and studio only work for Movies.*
-
-*NOTE: This component can currently only load images from an external URL.
-Links to a nfs or samba share or local media will not work with this custom component.*

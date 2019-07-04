@@ -2,7 +2,11 @@
 
 ## In Development (not yet released)
 
-- Added support for the custom updater component.
+## v0.2.7 (2019-07-04)
+
+- Fixed bug where artwork would not display if the media url was not http.
+  Now nfs/local/samba paths to artwork will be converted to an http url that
+  is served up by kodi.  Note that this will only work if the web UI is enabled.
 
 ## v0.2.5 (2019-05-02)
 
