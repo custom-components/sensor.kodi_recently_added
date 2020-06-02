@@ -134,11 +134,12 @@ class KodiRecentlyAddedTVSensor(KodiMediaSensor):
             'VideoLibrary.GetRecentlyAddedEpisodes',
             properties=self.properties)
         if result:
-            try:
-                self.data = result['episodes']
-            except KeyError:
-                _LOGGER.exception(
-                    'Unexpected result while fetching tv shows: %s', result)
+            episodes = result.get('episodes', [])
+            
+            if not episodes:
+                _LOGGER.warning('No episodes found after requesting data from Kodi.')
+            
+            self.data = episodes
 
 
 class KodiRecentlyAddedMoviesSensor(KodiMediaSensor):
