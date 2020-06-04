@@ -39,7 +39,7 @@ async def async_setup_platform(hass, config, async_add_entities,
     async_add_entities(sensors, True)
 
 
-class KodiMediaSensor(Entity):
+class KodiMediaSensor(Entity, RestoreEntity):
 
     def __init__(self, hass, config):
         self.kodi = KodiDevice(
