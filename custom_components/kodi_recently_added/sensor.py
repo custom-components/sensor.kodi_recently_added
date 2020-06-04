@@ -15,7 +15,6 @@ except ImportError:
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import (
     CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME)
-from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.restore_state import RestoreEntity
 
 
@@ -40,7 +39,7 @@ async def async_setup_platform(hass, config, async_add_entities,
     async_add_entities(sensors, True)
 
 
-class KodiMediaSensor(Entity, RestoreEntity):
+class KodiMediaSensor(RestoreEntity):
 
     def __init__(self, hass, config):
         self.kodi = KodiDevice(
