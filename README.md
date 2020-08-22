@@ -26,6 +26,7 @@ Kodi's recently added media.
 
 ### Platform Options:
 
+#### Variant №1
 | key | default | required | description
 | --- | --- | --- | ---
 | host | localhost | no | The host Kodi is running on.
@@ -33,6 +34,11 @@ Kodi's recently added media.
 | tcp_port | 9090 | no | The TCP port number. Used for WebSocket connections to Kodi.
 | username | | no | The Kodi HTTP username.
 | password | | no | The Kodi HTTP password.
+
+#### Variant №2
+| key | default | required | description
+| --- | --- | --- | ---
+| entity_id | | yes | Entity ID of a Kodi `media_player` entity
 
 ### Sample for configuration.yaml:
 
@@ -42,6 +48,9 @@ Kodi's recently added media.
       host: YOUR_KODI_HOST
       password: YOUR_KODI_PASSWORD
       port: YOUR_KODI_PORT
+
+    - platform: kodi_recently_added
+      entity_id: YOUR_KODI_ENTITY_ID
 
 ### Sample for ui-lovelace.yaml:
 
