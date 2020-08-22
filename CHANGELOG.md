@@ -6,7 +6,7 @@
 
 - Fixed bug where artwork would not display if the media url was not http.
   Now nfs/local/samba paths to artwork will be converted to an http url that
-  is served up by kodi.  Note that this will only work if the web UI is enabled.
+  is served up by kodi. Note that this will only work if the web UI is enabled.
 
 ## v0.2.5 (2019-05-02)
 
@@ -22,11 +22,11 @@
 
 ## v0.2.2 (2019-04-13)
 
-- Fixed import error due to great migration.  Caused installs of HA >=0.91 to fail.
+- Fixed import error due to great migration. Caused installs of HA >=0.91 to fail.
 
 ## v0.2.1 (2019-03-10)
 
-- Fixed error that occured when there was a TransportError getting data from kodi.
+- Fixed error that occurred when there was a TransportError getting data from kodi.
 
 ## v0.2.0 (2019-03-10)
 
@@ -37,4 +37,3 @@
 ## v0.1.0 (2019-01-20)
 
 - Initial release.
-
