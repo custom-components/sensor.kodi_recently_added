@@ -4,7 +4,7 @@ I re-wrote this component in a new repository located here: https://github.com/b
 
 This repository only works on homeassiatant < 0.115.0 and will no longer be updated.
 
-I am leaving the rest of the README for historical reasons or users who can't use homeassistant >= 0.115.0.
+I am leaving the rest of the README for historical reasons or for users who can't use homeassistant >= 0.115.0.
 
 # Kodi Recently Added Component
 
