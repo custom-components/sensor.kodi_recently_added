@@ -1,6 +1,12 @@
-# Kodi Recently Added Component
+# This repository has moved and is no longer updated.
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
+I re-wrote this component in a new repository located here: https://github.com/boralyl/kodi-recently-added  It is specifically for homeassistant >= 0.115.0 as it requires configuring kodi through the integrations UI.
+
+This repository only works on homeassiatant < 0.115.0 and will no longer be updated.
+
+I am leaving the rest of the README for historical reasons or users who can't use homeassistant >= 0.115.0.
+
+# Kodi Recently Added Component
 
 Home Assistant component to feed [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card) with
 Kodi's recently added media.
